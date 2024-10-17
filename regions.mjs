@@ -31,13 +31,11 @@ const Regions = {
 	}
 }
 
-const RegionsCodes = {
-	'f': Regions.Frankfurt,
-	'b': Regions.Brazil,
-	'i': Regions.India,
-	'u': Regions.USA,
-	'a': Regions.AUS,
-	's': Regions.STK
+const RegionsCodes = {};
+
+for (const key in Regions) {
+	const region = Regions[key];
+	RegionsCodes[region.code] = region;
 }
 
 export { Regions, RegionsCodes };
