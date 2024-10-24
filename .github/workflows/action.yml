@@ -4,7 +4,7 @@ on:
   schedule:
     # Runs at 12:00 AM every day
     - cron: "0 0 * * *"
-
+  workflow_dispatch:
 jobs:
   postgrest_head_request:
     runs-on: ubuntu-latest
