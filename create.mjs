@@ -1,4 +1,4 @@
-import { getFirstRespondingDB } from './database';
+import { getFirstRespondingDB } from './database.mjs';
 
 function isValidUrl(url) {
 	const urlPattern = new RegExp(
