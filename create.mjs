@@ -12,15 +12,23 @@ function isValidUrl(url) {
 	return urlPattern.test(url);
 }
 
+const responseOptions = {
+	"headers": {
+		"Access-Control-Allow-Origin": "*",
+		"Access-Control-Allow-Methods": "POST",
+		"Edge-Region": process.env.VERCEL_REGION
+	}
+}
+
 export async function POST(req) {
 	const url = await req.text();
 
 	if (!url) {
-		return new Response("Invalid request", { status: 400 });
+		return new Response("Invalid request", { ...responseOptions, status: 400 });
 	}
 
 	if (!isValidUrl(url)) {
-		return new Response("Invalid url", { status: 400 });
+		return new Response("Invalid url", { ...responseOptions, status: 400 });
 	}
 
 	try {
@@ -40,13 +48,7 @@ export async function POST(req) {
 
 		const key = (await response.json())[0].key;
 
-		return new Response(region.code + key, {
-			"headers": {
-				"Access-Control-Allow-Origin": "*",
-				"Access-Control-Allow-Methods": "POST",
-				"Edge-Region": process.env.VERCEL_REGION
-			}
-		});
+		return new Response(region.code + key, responseOptions);
 
 	} catch (error) {
 		console.error('Failed to fetch data:', error);
