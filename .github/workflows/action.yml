@@ -1,0 +1,16 @@
+name: Daily PostgREST HEAD Request
+
+on:
+  schedule:
+    # Runs at 12:00 AM every day
+    - cron: "0 0 * * *"
+
+jobs:
+  postgrest_head_request:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: India HEAD
+      run: |
+        curl -I "https://rhbgejtirrdfozjasxvn.supabase.co/rest/v1/nodejs-url" \
+        -H "apikey: ${{ secrets.INDIA_ANON }}" \
