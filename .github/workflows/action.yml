@@ -13,4 +13,29 @@ jobs:
     - name: India HEAD
       run: |
         curl -I "https://rhbgejtirrdfozjasxvn.supabase.co/rest/v1/nodejs-urls" \
-        -H "apikey: ${{ secrets.INDIA_ANON }}" \
+        -H "apikey: ${{ secrets.INDIA_ANON }}" \	
+
+    - name: USA HEAD
+      run: |
+        curl -I "https://pjxlakfgjomqxihmqgxc.supabase.co/rest/v1/nodejs-urls" \
+        -H "apikey: ${{ secrets.USA_ANON }}" \
+
+    - name: BRAZIL HEAD
+      run: |
+        curl -I "https://huvetraghisutwxkgtzv.supabase.co/rest/v1/nodejs-urls" \
+        -H "apikey: ${{ secrets.BRAZIL_ANON }}" \
+
+    - name: FRANKFURT HEAD
+      run: |
+        curl -I "https://ltlxwqzqljcvgnbawkpz.supabase.co/rest/v1/nodejs-urls" \
+        -H "apikey: ${{ secrets.FRANKFURT_ANON }}" \
+
+    - name: AUSTRALIA HEAD
+      run: |
+        curl -I "https://nceblmminkeqieeaibfx.supabase.co/rest/v1/nodejs-urls" \
+        -H "apikey: ${{ secrets.AUSTRALIA_ANON }}" \
+
+    - name: STK HEAD
+      run: |
+        curl -I "https://cxmekmgutpttdaqcncqf.supabase.co/rest/v1/nodejs-urls" \
+        -H "apikey: ${{ secrets.STK_ANON }}" \
