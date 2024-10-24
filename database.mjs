@@ -1,4 +1,6 @@
-import { Regions as dbRegions } from "./regions.mjs";
+import { Regions } from "./regions.mjs";
+
+const dbRegions = Object.values(Regions);
 
 // Helper function to make a HEAD request with aborting capability
 async function headRequest({ region, controller }) {
