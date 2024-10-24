@@ -12,5 +12,5 @@ jobs:
     steps:
     - name: India HEAD
       run: |
-        curl -I "https://rhbgejtirrdfozjasxvn.supabase.co/rest/v1/nodejs-url" \
+        curl -I "https://rhbgejtirrdfozjasxvn.supabase.co/rest/v1/nodejs-urls" \
         -H "apikey: ${{ secrets.INDIA_ANON }}" \
