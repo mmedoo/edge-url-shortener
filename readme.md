@@ -16,15 +16,17 @@ https://en.wikipedia.org/wiki/Edge_computing
 		6. **USA** (u)
 	- Write requests are forwarded to first responding DB (Least Latency).
 	- No Replications.
+
 - **Hash Indexing** by PostgreSQL is used to achieve constant time exact matching reads.
+
 - **In-memory Caching** on the edge is under development.
+
 - **Shorter Domain Name** is needed to achieve value.
 
 ### Write Request Flow
 - The Edge Function makes a `HEAD` request to all 6 DBs. The first responding DB is used to store the URL and generate the corresponding key whose column is hash indexed for constant time exact matching reads.
 
 - The DB returns the generated key to the function where the DB identifier is added as prefix to the key. The Edge function responds to the user with the key prefixed with the DB identifier.
-
 
 - **Full Key example**:
 
@@ -38,3 +40,6 @@ https://en.wikipedia.org/wiki/Edge_computing
 ### Read Request Flow
 
 - The Edge Function takes a key from the user, which starts with a DB identifier, makes a query to the corresponding DB to retrieve the URL corresponding to that key, redirects the user to the URL.
+
+# Live at
+https://mmedoo.github.io/url
