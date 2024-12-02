@@ -1,8 +1,7 @@
 # Introduction
-Available at: <a href="https://mmedoo.github.io/url" target="_blank">https://mmedoo.github.io/url</a>
+Available at: https://mmedoo.github.io/url
 
-URL shortening using Edge Functions. More about edge functions here:
-https://en.wikipedia.org/wiki/Edge_computing
+URL shortening using Edge Functions. More about edge functions here: https://en.wikipedia.org/wiki/Edge_computing
 
 # Features
 
