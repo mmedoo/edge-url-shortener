@@ -2,7 +2,7 @@ import { RegionsCodes } from "./regions.mjs";
 
 export async function GET(request) {
 	const requestUrl = new URL(request.url);
-	var key = requestUrl.pathname.split("/")[1];
+	let key = requestUrl.pathname.split("/")[1];
 	
 	if (!key || key === '') {
 		return new Response('Invalid key', { status: 400 });

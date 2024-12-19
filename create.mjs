@@ -31,6 +31,11 @@ export async function POST(req) {
 		return new Response("Invalid url", { ...responseOptions, status: 400 });
 	}
 
+	const urlObject = new URL(url);
+	if (urlObject.origin === "https://create-short.vercel.app") {
+		return new Response(urlObject.pathname.replace("/", ""), responseOptions);
+	}
+
 	try {
 		const region = await getFirstRespondingDB();
 		const link = region.url + "/rest/v1/nodejs-urls";
