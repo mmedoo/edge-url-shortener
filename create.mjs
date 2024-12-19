@@ -51,7 +51,7 @@ export async function POST(req) {
 			body: JSON.stringify({ p_url: url })
 		});
 
-		const key = (await response.text()).replace(/"/g, '');
+		const key = (await response.text()).slice(1, -1);
 
 		return new Response(region.code + key, responseOptions);
 
