@@ -38,7 +38,7 @@ export async function POST(req) {
 
 	try {
 		const region = await getFirstRespondingDB();
-		const link = region.url + "/rest/v1/nodejs-urls";
+		const link = region.url + "/rest/v1/rpc/check_or_create_nodejs_url";
 		const apikey = region.anon;
 
 		const response = await fetch(link, {
@@ -46,12 +46,12 @@ export async function POST(req) {
 			headers: {
 				"Content-Type": "application/json",
 				"apikey": apikey,
-				"Prefer": "return=representation"
+				// "Prefer": "return=representation"
 			},
-			body: JSON.stringify({ url })
+			body: JSON.stringify({ p_url: url })
 		});
 
-		const key = (await response.json())[0].key;
+		const key = (await response.text()).replace(/"/g, '');
 
 		return new Response(region.code + key, responseOptions);
 
