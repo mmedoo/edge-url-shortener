@@ -2,7 +2,6 @@ import { Regions } from "./regions.mjs";
 
 const dbRegions = Object.values(Regions);
 
-// Helper function to make a HEAD request with aborting capability
 async function headRequest({ region, controller }) {
 	try {
 		const response = await fetch(region.url + "/rest/v1", {
@@ -14,18 +13,17 @@ async function headRequest({ region, controller }) {
 		});
 
 		// if (!response.ok) throw new Error(`Error: ${response.statusText}`);
-
-		return true; // Resolve if the response is successful
+		
+		return true;
 	} catch (error) {
 		if (error.name === 'AbortError') {
-			return false; // The request was aborted
+			return false;
 		} else {
-			throw error; // Some other error occurred
+			throw error;
 		}
 	}
 }
 
-// Main function to find the first responding DB and abort the rest
 async function getFirstRespondingDB() {
 
 	// Create an AbortController for each request
