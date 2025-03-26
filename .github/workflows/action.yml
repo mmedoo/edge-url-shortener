@@ -43,4 +43,4 @@ jobs:
         - uses: actions/checkout@v4
         - uses: gautamkrishnar/keepalive-workflow@v2
           with:
-            time_elapsed: 0
+            time_elapsed: 10
