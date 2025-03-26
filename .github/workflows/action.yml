@@ -33,3 +33,12 @@ jobs:
     - name: STK HEAD
       run: |
         curl -I "https://cxmekmgutpttdaqcncqf.supabase.co/rest/v1/nodejs-urls" -H "apikey: ${{ secrets.STK_ANON }}"
+
+  keepalive-job:
+      name: Keepalive Workflow
+      runs-on: ubuntu-latest
+      permissions:
+        actions: write
+      steps:
+        - uses: actions/checkout@v4
+        - uses: gautamkrishnar/keepalive-workflow@v2
