@@ -34,13 +34,18 @@ jobs:
       run: |
         curl -I "https://cxmekmgutpttdaqcncqf.supabase.co/rest/v1/nodejs-urls" -H "apikey: ${{ secrets.STK_ANON }}"
 
-  keepalive-job:
-      name: Keepalive Workflow
+  dummy-commit-job:
+      name: Dummy Commit Job
       runs-on: ubuntu-latest
-      permissions:
-        actions: write
       steps:
-        - uses: actions/checkout@v4
-        - uses: gautamkrishnar/keepalive-workflow@v2
-          with:
-            time_elapsed: 10
+        - name: Checkout Code
+          uses: actions/checkout@v4
+
+        - name: Make Dummy Commit
+          run: |
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            echo "# Dummy Commit" >> dummy_commit.txt
+            git add dummy_commit.txt
+            git commit -m "chore: add dummy commit"
+            git push
