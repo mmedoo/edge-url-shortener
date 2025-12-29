@@ -2,28 +2,6 @@ import { Regions } from "./regions.mjs";
 
 const dbRegions = Object.values(Regions);
 
-async function headRequest({ region, controller }) {
-	try {
-		const response = await fetch(region.url + "/rest/v1", {
-			method: 'HEAD',
-			headers: {
-				'apikey': region.anon
-			},
-			signal: controller.signal
-		});
-
-		// if (!response.ok) throw new Error(`Error: ${response.statusText}`);
-		
-		return true;
-	} catch (error) {
-		if (error.name === 'AbortError') {
-			return false;
-		} else {
-			throw error;
-		}
-	}
-}
-
 async function getFirstRespondingDB() {
 
 	// Create an AbortController for each request
@@ -35,14 +13,18 @@ async function getFirstRespondingDB() {
 			dbRegions.map((region, index) =>
 				(async () => {
 					try {
-						const response = await fetch(region.url + "/rest/v1", {
+						const response = await fetch(region.url + "/rest-admin/v1/ready", {
 							method: 'HEAD',
 							headers: { 'apikey': region.anon },
 							signal: controllers[index].signal
 						});
-						if (response.ok) return index; // resolve only on positive status
+						
+						if (response.ok)
+							return index; // resolve only on positive status
+
 						// Reject so Promise.any keeps waiting for a successful one
 						throw new Error(`Non-OK response: ${response.status}`);
+						
 					} catch (error) {
 						// propagate AbortError and other errors so this promise rejects
 						throw error;
