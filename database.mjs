@@ -30,11 +30,24 @@ async function getFirstRespondingDB() {
 	const controllers = dbRegions.map(() => new AbortController());
 
 	try {
-		// Use Promise.race to wait for the first successful response
-		const firstRespondingIndex = await Promise.race(
+		// Use Promise.any to wait for the first successful (2xx) response
+		const firstRespondingIndex = await Promise.any(
 			dbRegions.map((region, index) =>
-				headRequest({ region, controller: controllers[index] })
-					.then(() => index) // Return the index of the first successful region
+				(async () => {
+					try {
+						const response = await fetch(region.url + "/rest/v1", {
+							method: 'HEAD',
+							headers: { 'apikey': region.anon },
+							signal: controllers[index].signal
+						});
+						if (response.ok) return index; // resolve only on positive status
+						// Reject so Promise.any keeps waiting for a successful one
+						throw new Error(`Non-OK response: ${response.status}`);
+					} catch (error) {
+						// propagate AbortError and other errors so this promise rejects
+						throw error;
+					}
+				})()
 			)
 		);
 
