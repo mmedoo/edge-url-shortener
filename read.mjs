@@ -4,16 +4,8 @@ export async function GET(request) {
 	const requestUrl = new URL(request.url);
 	let key = requestUrl.pathname.split("/")[1];
 	
-	if (!key || key === '') {
-		return new Response('Invalid key', { status: 400 });
-	}
-
-	if (key.length < 4) {
-		return new Response('Invalid key length', { status: 400 });
-	}
-
-	if (!RegionsCodes[key[0]]) {
-		return new Response('Invalid region code', { status: 400 });
+	if (!key || key.length < 4 || !RegionsCodes[key[0]]) {
+		return new Response("Invalid key. Maybe you didn't copy it right.", { status: 400 });
 	}
 
 	const db = RegionsCodes[key[0]];
